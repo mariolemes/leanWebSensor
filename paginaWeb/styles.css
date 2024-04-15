@@ -1,0 +1,154 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header img {
+    width: 200px; /* ajuste conforme necessário */
+    height: auto;
+}
+
+.header h1 {
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 60px; /* Ajuste conforme a altura do rodapé */
+    height: auto;
+}
+
+.producao-container {
+    margin-top: 15px;
+    background-color: #f0f0f0;
+    padding: 0px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.control-panel {
+    margin-top: 15px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding-top: 5px;
+}
+
+.control-panel h2 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+
+.button-container {
+    text-align: center;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 120px; /* Largura fixa para os botões */
+}
+
+#producaoDisplay {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.footer {
+    background-color: #6495ED; /* Azul cornflower */
+    color: white;
+    text-align: center;
+    padding: 5px;
+    position: fixed; /* Torna o rodapé fixo */
+    bottom: 0; /* Alinha o rodapé na parte inferior da tela */
+    width: 100%;
+}
+
+.red {
+    margin-left: 20px;
+    background-color: #FF0000; /* Vermelho */
+}
+
+.red:hover {
+    background-color: #CC0000; /* Vermelho mais escuro ao passar o mouse */
+}
+
+.green {
+    background-color: #4CAF50; /* Verde */
+}
+
+.green:hover {
+    background-color: #347736; /* Verde mais escuro ao passar o mouse */
+}
+
+.yellow {
+
+    background-color: #eddd84; /* Amarelo */
+    color: black;
+}
+
+.yellow:hover {
+    background-color: #CCCC00; /* Amarelo mais escuro ao passar o mouse */
+}
+
+
+h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+p {
+    text-align: center;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 200px; /* ajuste conforme necessário */
+    margin-bottom: 20px;
+}

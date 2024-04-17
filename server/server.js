@@ -12,7 +12,7 @@ chaves = {  'liga': 0,
             'desliga': 0,
             'restart': 0}
 
-producao = {sensor : 0, msg:"Inicializando"}
+producao = {sensor : 0, msg:"Iniciando comunicação com o servidor..."}
 
 //***********************controle das chave**********************
 // aguarda postagem da página web feita através dos botões criados em html

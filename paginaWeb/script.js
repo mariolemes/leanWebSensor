@@ -26,7 +26,7 @@ function receiverRequest(){
         if (json.msg === "Ligado" && lastSensorValue === json.sensor && (Date.now() - lastSensorChangeTime) >= 10000) {
             erroDisplay.textContent = "Erro: Sensor não alterou por 2 segundos.";
         } else {
-            erroDisplay.textContent = ""; // Limpa o campo de erro se não houver erro
+            erroDisplay.textContent = "-"; // Limpa o campo de erro se não houver erro
         }
         
         // Se o valor do sensor mudou, atualiza o timestamp da última mudança de estado

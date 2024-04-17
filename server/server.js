@@ -48,4 +48,28 @@ app.get('/producao', function (req, res){
 })
 //*************************************************************** 
 
+
+// Variável para armazenar o timestamp do último sensor
+var lastSensorChange = Date.now();
+var erroMsg = ""; // Variável independente para armazenar a mensagem de erro
+
+// Middleware para verificar se houve uma mudança no sensor nos últimos 10 segundos
+app.use((req, res, next) => {
+    const currentTime = Date.now();
+    const timeDifference = currentTime - lastSensorChange;
+
+    // Se o sensor não mudou nos últimos 10 segundos e a planta está ligada, define erroMsg
+    if (timeDifference >= 10000 && chaves.liga === 1) {
+        erroMsg = "Erro na produção: verifique a máquina!";
+    } else {
+        erroMsg = ""; // Reseta a mensagem de erro
+    }
+
+    // Atualiza o timestamp do último sensor
+    lastSensorChange = currentTime;
+
+    next();
+});
+
+
 app.listen(3000)

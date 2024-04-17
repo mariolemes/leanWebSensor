@@ -2,9 +2,13 @@ const ligarButton = document.getElementById('ligarButton');
 const desligarButton = document.getElementById('desligarButton');
 const restartButton = document.getElementById('restartButton');
 const producaoDisplay = document.getElementById('producaoDisplay');
+const erroDisplay = document.getElementById('erroDisplay');
+const urlPost = 'https://leanwebsensor-svr.onrender.com/chaves'
+const urlGet = 'https://leanwebsensor-svr.onrender.com/producao'
 
-var urlPost = 'https://leanwebsensor-svr.onrender.com/chaves'
-var urlGet = 'https://leanwebsensor-svr.onrender.com/producao'
+var lastSensorValue; // Último valor do sensor
+var lastSensorTimestamp; // Timestamp do último valor do sensor
+
 
 function receiverRequest(){
     fetch(urlGet, {
@@ -17,6 +21,21 @@ function receiverRequest(){
     .then(json => {
         producaoDisplay.textContent = json.sensor;
         feedbackDisplay.textContent = json.msg;
+
+        // Verifica se o status da produção é "Ligado" e se o sensor não mudou nos últimos 10 segundos
+        if (json.msg === "Ligado" && lastSensorValue === json.sensor && (Date.now() - lastSensorChangeTime) >= 2000) {
+            erroDisplay.textContent = "Erro: Sensor não alterou por 2 segundos.";
+        } else {
+            erroDisplay.textContent = ""; // Limpa o campo de erro se não houver erro
+        }
+        
+        // Se o valor do sensor mudou, atualiza o timestamp da última mudança de estado
+        if (lastSensorValue !== json.sensor) {
+            lastSensorChangeTime = Date.now();
+        }
+
+        lastSensorValue = json.sensor;
+
         console.log(json.sensor);
     })
 }

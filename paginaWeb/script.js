@@ -24,7 +24,10 @@ function receiverRequest(){
 
         // Verifica se o status da produção é "Ligado" e se o sensor não mudou nos últimos 10 segundos
         if (json.msg === "Ligado" && lastSensorValue === json.sensor && (Date.now() - lastSensorChangeTime) >= 10000) {
+            feedbackDisplayy.textContent = "";
             erroDisplay.textContent = "Erro: Sensor não alterou por 10 segundos.";
+        } else {
+            erroDisplay.textContent = "";
         }
         
         // Se o valor do sensor mudou, atualiza o timestamp da última mudança de estado

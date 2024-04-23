@@ -2,13 +2,13 @@ const ligarButton = document.getElementById('ligarButton');
 const desligarButton = document.getElementById('desligarButton');
 const restartButton = document.getElementById('restartButton');
 const producaoDisplay = document.getElementById('producaoDisplay');
-const erroDisplay = document.getElementById('erroDisplay');
-const urlPost = 'https://leanwebsensor-svr.onrender.com/chaves'
-const urlGet = 'https://leanwebsensor-svr.onrender.com/producao'
+const erro = document.getElementById('erro');
 
-var lastSensorValue; // Último valor do sensor
-var lastSensorTimestamp; // Timestamp do último valor do sensor
+var urlPost = 'https://leanwebsensorserver.onrender.com/chaves'
+var urlGet = 'https://leanwebsensorserver.onrender.com/producao'
 
+sensor_old = 0;
+contaErro = 0;
 
 function receiverRequest(){
     fetch(urlGet, {
@@ -20,25 +20,22 @@ function receiverRequest(){
     .then(response => response.json())
     .then(json => {
         producaoDisplay.textContent = json.sensor;
-        feedbackDisplay.textContent = json.msg;
-
-        // Verifica se o status da produção é "Ligado" e se o sensor não mudou nos últimos 10 segundos
-        if (json.msg === "Ligado" && lastSensorValue === json.sensor && (Date.now() - lastSensorChangeTime) >= 10000) {
-            feedbackDisplayy.textContent = "";
-            erroDisplay.textContent = "Erro: Sensor não alterou por 10 segundos.";
-        } else {
-            erroDisplay.textContent = "";
-        }
-        
-        // Se o valor do sensor mudou, atualiza o timestamp da última mudança de estado
-        if (lastSensorValue !== json.sensor) {
-            lastSensorChangeTime = Date.now();
-        }
-
-        lastSensorValue = json.sensor;
-
         console.log(json.sensor);
     })
+    if (json.msg == "Ligado"){
+        if (json.sensor == sensor_old)
+            contaErro = contaErro + 1;
+        else{
+            contaErro = 0;
+            sensor_old = json.sensor;
+        }
+        if (contaErro >= 5)
+            erro.textContent = "ERRO DE ACIONAMENTO";
+        else
+            erro.textContent = "";
+    }
+    else
+        erro.textContent = "";
 }
 
 setInterval(receiverRequest, 2000)  
